@@ -24,7 +24,8 @@ createGrid(16);
 
 container.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('grid-square')) {
-        event.target.style.backgroundColor = 'yellow';
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        event.target.style.backgroundColor = randomColor;
     }
 });
 
