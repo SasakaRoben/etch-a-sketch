@@ -1,11 +1,26 @@
-const container = document.querySelector(".grid-container");
+const body = document.querySelector('body');
+const btn = document.createElement('button');
+btn.textContent = "Click Me!!";
+body.appendChild(btn);
+btn.addEventListener("click", () => {
+    let userInput = prompt("Enter the number of squares per side for the new grid (Max is 100)");
+    let number = parseInt(userInput);
+    createGrid(number);
+});
 
-for (let i = 0; i < 16 * 16; i++) 
+const container = document.querySelector(".grid-container");
+function createGrid(size)
 {
-    const square = document.createElement("div");
-    square.classList.add('grid-square');
-    container.appendChild(square);
+    container.replaceChildren(); //clear the existing grid
+
+    for (let i = 0; i < size * size; i++) {
+        const square = document.createElement("div");
+        square.classList.add('grid-square');
+        container.appendChild(square);
+    }
 }
+
+createGrid(16);
 
 container.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('grid-square')) {
@@ -18,6 +33,5 @@ container.addEventListener('mouseout', (event) => {
         event.target.style.backgroundColor = 'white';
     }
 });
-
 
 
