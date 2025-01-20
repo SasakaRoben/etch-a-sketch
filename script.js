@@ -16,6 +16,9 @@ function createGrid(size)
     for (let i = 0; i < size * size; i++) {
         const square = document.createElement("div");
         square.classList.add('grid-square');
+        square.dataset.opacity = 0;
+        square.style.backgroundColor = "white";
+        square.style.opacity = 0;
         container.appendChild(square);
     }
 }
@@ -25,13 +28,13 @@ createGrid(16);
 container.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('grid-square')) {
         const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-        event.target.style.backgroundColor = randomColor;
-    }
-});
-
-container.addEventListener('mouseout', (event) => {
-    if (event.target.classList.contains('grid-square')) {
-        event.target.style.backgroundColor = 'white';
+        let currentOpacity = parseFloat(event.target.dataset.opacity);
+        if (currentOpacity < 1) {
+            currentOpacity += 0.1; // Increment opacity by 10%
+            event.target.dataset.opacity = currentOpacity.toFixed(1);
+            event.target.style.backgroundColor = randomColor;
+            event.target.style.opacity = currentOpacity;
+        }
     }
 });
 
